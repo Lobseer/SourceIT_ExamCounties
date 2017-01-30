@@ -16,17 +16,21 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         List<Country> world = Arrays.asList(
-                new CountryImpl("UA", Arrays.asList(
-                        new StateImpl("Kh", 88888L, new BigDecimal(2000)),
-                        new StateImpl("Lv", 10L, new BigDecimal(3456))
+                new CountryImpl("Ukraine", Arrays.asList(
+                        new StateImpl("Kharkov", 88888L, new BigDecimal(2000)),
+                        new StateImpl("Lvov", 10L, new BigDecimal(34563)),
+                        new StateImpl("Kiev", 2313454L, new BigDecimal(242355))
                 )),
                 new CountryImpl("USA", Arrays.asList(
-                        new StateImpl("Cal", 100000L, new BigDecimal(1235)),
-                        new StateImpl("Tex", 1332212L, new BigDecimal(6555))
+                        new StateImpl("California", 199999990L, new BigDecimal(1235)),
+                        new StateImpl("Texas", 1332212L, new BigDecimal(6555))
                 )),
-                new CountryImpl("Rus", Arrays.asList(
-                        new StateImpl("Mos", 1241241L, new BigDecimal(33333)),
-                        new StateImpl("Pet", 511111L, new BigDecimal(201100))
+                new CountryImpl("Russia", Arrays.asList(
+                        new StateImpl("Moscow", 1241241L, new BigDecimal(33423)),
+                        new StateImpl("Peter", 511111L, new BigDecimal(20100))
+                )),
+                new CountryImpl("Monaco", Arrays.asList(
+                        new StateImpl("Monaco", 37731L, new BigDecimal(2.02))
                 ))
         );
         Service mainService = new ServiceImpl(world);

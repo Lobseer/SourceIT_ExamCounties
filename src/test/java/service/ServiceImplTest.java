@@ -10,7 +10,6 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 /**
  * Class description
@@ -19,7 +18,7 @@ import java.util.NoSuchElementException;
  */
 
 public class ServiceImplTest {
-    List<Country> world = Arrays.asList(
+    private List<Country> world = Arrays.asList(
             new CountryImpl("Ukraine", Arrays.asList(
                     new StateImpl("Kharkov", 88888L, new BigDecimal(2000)),
                     new StateImpl("Lvov", 10L, new BigDecimal(34563)),
@@ -52,7 +51,7 @@ public class ServiceImplTest {
         test.getCountry(null);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void getCountryPopulationUnCorrectNameTest() {
         ServiceImpl test = new ServiceImpl(world);
         Country expected = null;

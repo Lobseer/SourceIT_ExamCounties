@@ -2,6 +2,7 @@ package impl;
 
 import api.Country;
 import api.State;
+import org.apache.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,6 +15,8 @@ import java.util.Objects;
  */
 
 public class CountryImpl implements Country {
+    private static final Logger log = Logger.getLogger(CountryImpl.class);
+
     private String name;
     private Long population;
     private BigDecimal square;
@@ -26,6 +29,13 @@ public class CountryImpl implements Country {
         this.states = states;
         this.population = states.stream().mapToLong(State::getPopulation).sum();
         this.square = states.stream().map(State::getSquare).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
+        StringBuilder st = new StringBuilder();
+        for (int i = 0; i < states.size()-1; i++) {
+            st.append(states.get(i).getName());
+            st.append(", ");
+        }
+        st.append(states.get(states.size()-1).getName());
+        log.info(String.format("Create new country: Name=%s, Population=%d, Square=%.4f, States[%s];", name, population, square, st));
     }
 
     public boolean addNewState(State state) {
@@ -34,9 +44,11 @@ public class CountryImpl implements Country {
                 states.add(state);
                 population+=state.getPopulation();
                 square.add(state.getSquare());
+                log.info(String.format("Add new state(Name=%s, Population=%d, Square=%.4f) into country %s;", state.getName(), state.getPopulation(), state.getSquare(), name));
                 return true;
             }
         }
+        log.warn(String.format("Failed adding new state into %s",name));
         return false;
     }
 
@@ -78,7 +90,7 @@ public class CountryImpl implements Country {
 
     @Override
     public String toString() {
-        return String.format("CountryImpl{ name=%1s; population=%2s; square=%3s; states=%4s;}",
+        return String.format("CountryImpl{ name=%1s; population=%2s; square=%3f; states=%4s;}",
                 name, population, square, states);
     }
 }
