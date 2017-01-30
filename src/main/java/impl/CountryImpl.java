@@ -5,6 +5,7 @@ import api.State;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Class description
@@ -57,6 +58,22 @@ public class CountryImpl implements Country {
     @Override
     public List<State> getStates() {
         return states;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CountryImpl country = (CountryImpl) o;
+        return Objects.equals(name, country.name) &&
+                Objects.equals(population, country.population) &&
+                Objects.equals(square, country.square) &&
+                Objects.equals(states, country.states);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, population, square, states);
     }
 
     @Override

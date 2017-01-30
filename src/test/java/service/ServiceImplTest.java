@@ -30,8 +30,8 @@ public class ServiceImplTest {
                     new StateImpl("Texas", 1332212L, new BigDecimal(6555))
             )),
             new CountryImpl("Russia", Arrays.asList(
-                    new StateImpl("Moscow", 1241241L, new BigDecimal(3333423)),
-                    new StateImpl("Peter", 511111L, new BigDecimal(201100))
+                    new StateImpl("Moscow", 1241241L, new BigDecimal(33423)),
+                    new StateImpl("Peter", 511111L, new BigDecimal(20100))
             )),
             new CountryImpl("Monaco", Arrays.asList(
                     new StateImpl("Monaco", 37731L, new BigDecimal(2.02))
@@ -63,7 +63,7 @@ public class ServiceImplTest {
     @Test
     public void getCountryPopulationNormalTest() {
         ServiceImpl test = new ServiceImpl(world);
-        Long expected = 1241241L + 511111L;
+        Long expected = 1752352L;
         Long actual = test.getCountryPopulation("Russia");
         Assert.assertEquals(expected, actual);
     }
@@ -79,7 +79,7 @@ public class ServiceImplTest {
     @Test
     public void getCountrySquareTest() {
         ServiceImpl test = new ServiceImpl(world);
-        BigDecimal expected = new BigDecimal(3534523);
+        BigDecimal expected = new BigDecimal(53523);
         BigDecimal actual = test.getCountrySquare("Russia");
         Assert.assertEquals(expected, actual);
     }
@@ -87,9 +87,7 @@ public class ServiceImplTest {
     @Test
     public void getTotalDensityOfPeopleTest() {
         ServiceImpl test = new ServiceImpl(world);
-        //Country temp = world.get(0);
-        //BigDecimal expected = new BigDecimal(temp.getPopulation() / temp.getSquare().doubleValue());
-        BigDecimal expected = new BigDecimal(8.3262894470776357208928789106476);
+        BigDecimal expected = new BigDecimal(8.6131120974623366007213589657175);
         BigDecimal actual = test.getTotalDensityOfPeople("Ukraine");
         Assert.assertEquals(expected, actual);
     }
@@ -97,9 +95,7 @@ public class ServiceImplTest {
     @Test
     public void getAverageDensityOfPeopleByStatesTest() {
         ServiceImpl test = new ServiceImpl(world);
-        //Country temp = world.get(0);
-        //BigDecimal expected = new BigDecimal(temp.getPopulation() / temp.getSquare().doubleValue());
-        BigDecimal expected = new BigDecimal(4.6636004621628933135155273864923);
+        BigDecimal expected = new BigDecimal(2.8710373658207788669071196552392);
         BigDecimal actual = test.getAverageDensityOfPeopleByStates("Ukraine");
         Assert.assertEquals(expected, actual);
     }
@@ -108,7 +104,7 @@ public class ServiceImplTest {
     public void getOvercrowdedState() {
         ServiceImpl test = new ServiceImpl(world);
         List<State> expected = Arrays.asList(world.get(1).getStates().get(0),world.get(1).getStates().get(1));
-        List<State> actual = test.getOvercrowdedStates("Ukraine");
+        List<State> actual = test.getOvercrowdedStates("USA");
         Assert.assertEquals(expected, actual);
     }
 

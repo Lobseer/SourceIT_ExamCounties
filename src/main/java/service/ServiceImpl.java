@@ -3,11 +3,13 @@ package service;
 import api.Country;
 import api.Service;
 import api.State;
+import org.apache.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+
 /**
  * Class description
  *
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
  */
 
 public class ServiceImpl implements Service {
+    public static final Logger loger = Logger.getLogger(ServiceImpl.class);
     private static final double CROWDED = 50d;
 
     private List<Country> world;
@@ -49,16 +52,14 @@ public class ServiceImpl implements Service {
 
     @Override
     public BigDecimal getTotalDensityOfPeople(String name) {
-        if (name == null) throw new NullPointerException("Country name is null");
-        BigDecimal totalSquare = world.stream().map(Country::getSquare).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
-        Long totalPopulation = world.stream().mapToLong(Country::getPopulation).sum();
-        return new BigDecimal(totalPopulation / totalSquare.doubleValue());
+        Country temp = getCountry(name);
+        return new BigDecimal(temp.getPopulation()/temp.getSquare().doubleValue());
     }
 
     @Override
     public BigDecimal getAverageDensityOfPeopleByStates(String name) {
         Country temp = getCountry(name);
-        return new BigDecimal(temp.getStates().stream().mapToDouble((p)->p.getPopulation()/p.getSquare().doubleValue()).average().getAsDouble());
+        return new BigDecimal((temp.getPopulation()/temp.getSquare().doubleValue())/temp.getStates().size());
     }
 
     @Override

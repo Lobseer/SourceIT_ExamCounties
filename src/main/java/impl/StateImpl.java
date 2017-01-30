@@ -3,6 +3,7 @@ package impl;
 import api.State;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * Class description
@@ -36,6 +37,21 @@ public class StateImpl implements State {
     @Override
     public BigDecimal getSquare() {
         return square;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StateImpl state = (StateImpl) o;
+        return Objects.equals(name, state.name) &&
+                Objects.equals(population, state.population) &&
+                Objects.equals(square, state.square);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, population, square);
     }
 
     @Override
