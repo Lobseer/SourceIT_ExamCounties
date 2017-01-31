@@ -56,7 +56,7 @@ public class StateImpl implements State {
 
     @Override
     public String toString() {
-        return String.format("StateImpl{ name=%1s; population=%2s; square=%3s;}",
+        return String.format("StateImpl{ name=%s; population=%d; square=%.4f;}",
                 name, population, square);
     }
 }

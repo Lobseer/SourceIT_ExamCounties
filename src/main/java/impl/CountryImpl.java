@@ -90,7 +90,7 @@ public class CountryImpl implements Country {
 
     @Override
     public String toString() {
-        return String.format("CountryImpl{ name=%1s; population=%2s; square=%3f; states=%4s;}",
+        return String.format("CountryImpl{ name=%s; population=%d; square=%.4f; states=%s;}",
                 name, population, square, states);
     }
 }

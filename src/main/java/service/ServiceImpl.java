@@ -31,11 +31,13 @@ public class ServiceImpl implements Service {
 
     public static <T> String listToString(List<T> toStr, Function<T, String> get) {
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < toStr.size()-1; i++) {
-            result.append(get.apply(toStr.get(i)));
-            result.append(", ");
+        if(toStr!=null && toStr.size()>0) {
+            for (int i = 0; i < toStr.size() - 1; i++) {
+                result.append(get.apply(toStr.get(i)));
+                result.append(", ");
+            }
+            result.append(get.apply(toStr.get(toStr.size() - 1)));
         }
-        result.append(get.apply(toStr.get(toStr.size()-1)));
         return result.toString();
     }
 
@@ -54,17 +56,17 @@ public class ServiceImpl implements Service {
     }
 
     @Override
-    public List<Country> getOvercrowdedCountry() {
-        List<Country> result = world.stream().filter((p)->(p.getPopulation()/p.getSquare().doubleValue())>CROWDED).collect(Collectors.toList());
-        log.debug(String.format("Result: %s;", listToString(result, Country::getName)));
-        return result;
-    }
-
-    @Override
     public BigDecimal getCountrySquare(String name) {
         log.debug(String.format("Param: Name=%s;",name));
         BigDecimal result = getCountry(name).getSquare();
         log.debug(String.format("Result: Square=%.4f;", result));
+        return result;
+    }
+
+    @Override
+    public List<Country> getOvercrowdedCountry() {
+        List<Country> result = world.stream().filter((p)->(p.getPopulation()/p.getSquare().doubleValue())>CROWDED).collect(Collectors.toList());
+        log.debug(String.format("Result: %s;", listToString(result, Country::getName)));
         return result;
     }
 
