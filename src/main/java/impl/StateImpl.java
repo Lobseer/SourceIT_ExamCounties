@@ -2,6 +2,8 @@ package impl;
 
 import api.State;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -11,9 +13,13 @@ import java.util.Objects;
  * @author lobseer on 29.01.2017.
  */
 
+@XmlRootElement(name = "state")
 public class StateImpl implements State {
+    @XmlAttribute(name="name")
     private String name;
+    @XmlAttribute(name="population")
     private Long population;
+    @XmlAttribute(name="square")
     private BigDecimal square;
 
     public StateImpl() {}
