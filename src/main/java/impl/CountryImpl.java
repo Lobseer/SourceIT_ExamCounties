@@ -3,11 +3,10 @@ package impl;
 import api.Country;
 import api.State;
 import org.apache.log4j.Logger;
-import home.anno.XmlContainer;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+
+import javax.xml.bind.annotation.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,13 +19,17 @@ import java.util.Objects;
 @XmlRootElement(name = "country")
 public class CountryImpl implements Country {
     private static final Logger log = Logger.getLogger(CountryImpl.class);
-    @XmlAttribute(name = "name")
-    public String name;
+    @XmlAttribute
+    private String name;
+    @XmlAttribute
     private Long population;
+    @XmlAttribute
     private BigDecimal square;
 
-    @XmlContainer(containType = StateImpl.class)
-    @XmlElement(name = "states")
+    @XmlElementWrapper(name = "states")
+    @XmlElements(
+            @XmlElement(name = "state", type = StateImpl.class)
+    )
     private List<State> states;
 
     public CountryImpl() {
@@ -46,7 +49,7 @@ public class CountryImpl implements Country {
         log.info(String.format("Create new country: Name=%s, Population=%d, Square=%.4f, States[%s];", name, population, square, st));
     }
 
-    public boolean addNewState(State state) {
+    public boolean addNewState(StateImpl state) {
         if (state != null) {
             if (states.stream().noneMatch((p) -> p.getName().equals(state.getName()))) {
                 states.add(state);
@@ -77,7 +80,7 @@ public class CountryImpl implements Country {
 
     @Override
     public List<State> getStates() {
-        return states;
+        return new ArrayList<>(states);
     }
 
     @Override

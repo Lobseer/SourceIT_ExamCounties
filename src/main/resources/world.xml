@@ -1,27 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<root>
-    <country name="Ukraine">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<World>
+    <country name="Ukraine" population="2402352" square="278918">
         <states>
             <state name="Kharkov" population="88888" square="2000"/>
             <state name="Lvov" population="10" square="34563"/>
             <state name="Kiev" population="2313454" square="242355"/>
         </states>
     </country>
-    <country name="USA">
+    <country name="USA" population="201332202" square="7790">
         <states>
             <state name="California" population="199999990" square="1235"/>
             <state name="Texas" population="1332212" square="6555"/>
         </states>
     </country>
-    <country name="Russia">
+    <country name="Russia" population="1752352" square="53523">
         <states>
             <state name="Moscow" population="1241241" square="33423"/>
             <state name="Peter" population="511111" square="20100"/>
         </states>
     </country>
-    <country name="Monaco">
+    <country name="Monaco" population="37731" square="2.020000000000000017763568394002504646778106689453125">
         <states>
             <state name="Monaco" population="37731" square="2.020000000000000017763568394002504646778106689453125"/>
         </states>
     </country>
-</root>
+</World>

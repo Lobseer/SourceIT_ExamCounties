@@ -1,19 +1,17 @@
 package servlet;
 
-import api.Country;
 import api.Service;
-import impl.CountryImpl;
-import impl.StateImpl;
 import service.ServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
+import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
+
 
 /**
  * Class description
@@ -21,31 +19,46 @@ import java.util.List;
  * @author lobseer on 30.01.2017.
  */
 
-public class ServletUI extends HttpServlet {
+
+public class ServletController extends HttpServlet {
     private Service mainService;
+
+    private void loadCountries() throws Exception {
+        //SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        //Schema schema = sf.newSchema(new File("src/main/resources/world.xsd"));
+        File xml = new File(getServletContext().getRealPath("WEB-INF/classes/world.xml"));
+        JAXBContext jxc = JAXBContext.newInstance(ServiceImpl.class);
+
+        Unmarshaller unmarshaller = jxc.createUnmarshaller();
+
+        mainService = ((ServiceImpl) unmarshaller.unmarshal(xml));
+        /*unmarshaller.setSchema(schema);
+        unmarshaller.setEventHandler(
+                event -> {
+                    System.out.println("\nEVENT");
+                    System.out.println("SEVERITY:  " + event.getSeverity());
+                    System.out.println("MESSAGE:  " + event.getMessage());
+                    System.out.println("LINKED EXCEPTION:  " + event.getLinkedException());
+                    System.out.println("LOCATOR");
+                    System.out.println("    LINE NUMBER:  " + event.getLocator().getLineNumber());
+                    System.out.println("    COLUMN NUMBER:  " + event.getLocator().getColumnNumber());
+                    System.out.println("    OFFSET:  " + event.getLocator().getOffset());
+                    System.out.println("    OBJECT:  " + event.getLocator().getObject());
+                    System.out.println("    NODE:  " + event.getLocator().getNode());
+                    System.out.println("    URL:  " + event.getLocator().getURL());
+                    return true;
+                }
+        );*/
+    }
 
     @Override
     public void init() throws ServletException {
         super.init();
-        List<Country> world = Arrays.asList(
-                new CountryImpl("Ukraine", Arrays.asList(
-                        new StateImpl("Kharkov", 88888L, new BigDecimal(2000)),
-                        new StateImpl("Lvov", 10L, new BigDecimal(34563)),
-                        new StateImpl("Kiev", 2313454L, new BigDecimal(242355))
-                )),
-                new CountryImpl("USA", Arrays.asList(
-                        new StateImpl("California", 199999990L, new BigDecimal(1235)),
-                        new StateImpl("Texas", 1332212L, new BigDecimal(6555))
-                )),
-                new CountryImpl("Russia", Arrays.asList(
-                        new StateImpl("Moscow", 1241241L, new BigDecimal(33423)),
-                        new StateImpl("Peter", 511111L, new BigDecimal(20100))
-                )),
-                new CountryImpl("Monaco", Arrays.asList(
-                        new StateImpl("Monaco", 37731L, new BigDecimal(2.02))
-                ))
-        );
-        mainService = new ServiceImpl(world);
+        try {
+            loadCountries();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

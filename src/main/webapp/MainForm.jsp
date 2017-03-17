@@ -11,7 +11,7 @@
     <title>MainForm</title>
 </head>
 <body>
-<form action="/ServletUI" method="get">
+<form action="/ServletController" method="get">
     <h2>Country name</h2>
     <select name="country" size="1">
         <option value="Ukraine" selected>Ukraine</option>

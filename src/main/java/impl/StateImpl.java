@@ -15,11 +15,11 @@ import java.util.Objects;
 
 @XmlRootElement(name = "state")
 public class StateImpl implements State {
-    @XmlAttribute(name="name")
+    @XmlAttribute
     private String name;
-    @XmlAttribute(name="population")
+    @XmlAttribute
     private Long population;
-    @XmlAttribute(name="square")
+    @XmlAttribute
     private BigDecimal square;
 
     public StateImpl() {}

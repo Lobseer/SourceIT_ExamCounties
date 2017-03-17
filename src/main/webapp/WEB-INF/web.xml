@@ -6,18 +6,17 @@
   <display-name>Archetype Created Web Application</display-name>
 
   <servlet>
-    <servlet-name>ServletUI</servlet-name>
-    <servlet-class>servlet.ServletUI</servlet-class>
+    <servlet-name>ServletController</servlet-name>
+    <servlet-class>servlet.ServletController</servlet-class>
     <init-param>
       <param-name>param1</param-name>
       <param-value>First param</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ServletUI</servlet-name>
-    <url-pattern>/ServletUI/*</url-pattern>
+    <servlet-name>ServletController</servlet-name>
+    <url-pattern>/ServletController/*</url-pattern>
   </servlet-mapping>
-
 
   <welcome-file-list>
     <welcome-file>MainForm.jsp</welcome-file>
